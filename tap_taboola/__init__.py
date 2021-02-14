@@ -223,9 +223,8 @@ def verify_account_access(access_token, account_id):
         LOGGER.warn(("The provided `account_id` ({}) doesn't match the "
                      "`account_id` of the token issued ({}). Checking for access through Allowed Accounts.").format(account_id, token_account_id))
         # Check if account is a child account
-        allowed_accounts_url = '{}/api/1.0/users/current/allowed-accounts'.format(BASE_URL)
+        allowed_accounts_url = '{}/backstage/api/1.0/users/current/allowed-accounts'.format(BASE_URL)
         allowed_accounts = request(allowed_accounts_url, access_token)
-
         for account in allowed_accounts.json().get('results', []):
             if account.get('account_id') == account_id:
                 LOGGER.warn(("Access to `account_id` ({}) "
